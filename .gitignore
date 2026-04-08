@@ -1,0 +1,3 @@
+__pycache__/
+# Removed data since it's too large
+data/

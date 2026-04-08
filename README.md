@@ -5,7 +5,7 @@
   <p align="center">
     A machine learning pipeline for classifying the donor language of Japanese katakana loanwords (外来語)
     <br />
-    <a href="https://drive.google.com/file/d/1y-hAlAcFwX4dFXUihhqgUs6qZFndLtC8/view?usp=sharing"><strong>Explore the report »</strong></a>
+    <a href="https://drive.google.com/file/d/1jwD38TvuYH-NhQModb00Q4tixBcPIpG1/view?usp=sharing"><strong>Explore the report »</strong></a>
   </p>
 </div>
 

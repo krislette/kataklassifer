@@ -1,3 +1,13 @@
+---
+title: Kataklassifer
+emoji: 🤖
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+app_file: app.py
+pinned: false
+---
+
 <a id="readme-top"></a>
 
 <div align="center">

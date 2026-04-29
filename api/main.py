@@ -26,6 +26,10 @@ from transformers import pipeline
 BASE_DIR = Path(__file__).parent
 MODELS_DIR = BASE_DIR.parent / "models"
 
+# Fallback for Docker where /home/user/app is the working root
+if not MODELS_DIR.exists():
+    MODELS_DIR = Path("/home/user/app/models")
+
 MODEL_PATH = MODELS_DIR / "model.joblib"
 VECTORIZER_PATH = MODELS_DIR / "vectorizer.joblib"
 ENCODER_PATH = MODELS_DIR / "encoder.joblib"

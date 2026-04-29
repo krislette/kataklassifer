@@ -50,6 +50,9 @@ EMOTION_MUSIC: dict[str, list[dict]] = {
     "joy": [
         {"title": "ATARASHII GAKKO! - Que Sera Sera", "video_id": "0S1-b9xGQac"},
         {"title": "Wonderland x Showtime - Kyoufuu All Back", "video_id": "nq_x3D0_lgw"},
+        {"title": "Sumika - Fiction", "video_id": "IKHGAuNaGuA"},
+        {"title": "ATARASHII GAKKO! - OTONABLUE", "video_id": "l446hUqQ7GY"},
+        {"title": "Wonderland x Showtime - SEIBAITAAAAAASU!", "video_id": "w0lpuKNZRQ0"},
         {"title": "Creepy Nuts - Bling-Bang-Bang-Born", "video_id": "mLW35YMzELE"},
         {"title": "Wonderland x Showtime - Taiyoukei Disco", "video_id": "oA6aCY4bMg4"},
         {"title": "Gen Hoshino - Koi", "video_id": "jhOVibLEDhA"},
@@ -67,11 +70,15 @@ EMOTION_MUSIC: dict[str, list[dict]] = {
     "anger": [
         {"title": "Ado - Usseewa", "video_id": "Qp3b-RXtz4w"},
         {"title": "Neru - Lost One's Weeping", "video_id": "U1aS62Juz70"},
+        {"title": "Hige Dandism - Cry Baby", "video_id": "O1bhZgkC4Gw"},
         {"title": "Minami - Crying for Rain", "video_id": "0YF8vecQWYs"},
         {"title": "Eve - Dramaturgy", "video_id": "jJzw1h5CR-I"},
         {"title": "Kenshi Yonezu - Kick Back", "video_id": "M2cckDmNLMI"},
     ],
     "fear": [
+        {"title": "TK - Unravel", "video_id": "Fve_lHIPa-I"},
+        {"title": "Nightcord at 25:00 x KAITO - Bakenohana", "video_id": "UFRIsspP9UE"},
+        {"title": "ATARASHII GAKKO! - Tokyo Calling", "video_id": "pHMH408ltEM"},
         {"title": "Nightcord at 25:00 x KAITO - Heat Abnormal", "video_id": "ToqKNyZi2NQ"},
         {"title": "Yuzu - Hyori Ittai", "video_id": "eKoD2CRr_KA"},
         {"title": "Nightcord at 25:00 - Bug", "video_id": "2Ii7UBMxWVw"},
@@ -79,21 +86,25 @@ EMOTION_MUSIC: dict[str, list[dict]] = {
         {"title": "sakanaction - Arukuaround", "video_id": "cADu9rtlZGQ"},
     ],
     "surprise": [
+        {"title": "YOASOBI - Idol", "video_id": "ZRtdQ81jPUQ"},
+        {"title": "Ado - Buriki no Dance", "video_id": "iL7uoLCbJoc"},
         {"title": "Ado - New Genesis", "video_id": "1FliVTcX8bQ"},
         {"title": "RADWIMPS - Grand Escape", "video_id": "epQGR34yiTY"},
-        {"title": "Ado - Buriki no Dance", "video_id": "iL7uoLCbJoc"},
-        {"title": "YOASOBI - Idol", "video_id": "ZRtdQ81jPUQ"},
     ],
     "disgust": [
-        {"title": "Ado - Readymade", "video_id": "jg09lNupc1s"},
         {"title": "Nightcord at 25:00 - Bocca della Verità", "video_id": "ZjNUJUgyoOw"},
+        {"title": "Ado - Readymade", "video_id": "jg09lNupc1s"},
         {"title": "Eve - Literary Nonsense", "video_id": "OskXF3s0UT8"},
     ],
     "neutral": [
-        {"title": "ATARASHII GAKKO - Dounimo Tomaranai", "video_id": "59bnq4wlGx8"},
+        {"title": "Vaundy - Odoriko", "video_id": "7HgJIAUtICU"},
+        {"title": "Hanae - Kamisama Hajimemashita", "video_id": "gZaelu4lieE"},
+        {"title": "Fuji Kaze - Matsuri", "video_id": "NwOvu-j_WjY"},
+        {"title": "ATARASHII GAKKO! - Dounimo Tomaranai", "video_id": "59bnq4wlGx8"},
+        {"title": "Yorushika - Just a Sunny Day for You", "video_id": "-VKIqrvVOpo"},
+        {"title": "natori - Overdose", "video_id": "H08YWE4CIFQ"},
         {"title": "Mitchie M - Tokugawa Cup Noodle Kinshirei", "video_id": "jPXAgWkqbo4"},
         {"title": "Homecomings - Cakes", "video_id": "u1A53wFN9A0"},
-        {"title": "Hanae - Kamisama Hajimemashita", "video_id": "gZaelu4lieE"},
     ],
 }
 

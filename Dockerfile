@@ -1,4 +1,4 @@
-# Base image — slim Python, matches your dev environment
+# Base image: slim Python, matches your dev environment
 FROM python:3.11-slim
 
 # HuggingFace Spaces runs as a non-root user
@@ -9,13 +9,12 @@ ENV HOME=/home/user \
 
 WORKDIR /home/user/app
 
-# Copy and install dependencies first (layer cache benefit)
+# Copy and install dependencies first
 COPY --chown=user api/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir --upgrade pip \
  && pip install --no-cache-dir -r requirements.txt
 
 # Pre-download the emotion model into the image during build
-# This is the KEY step that eliminates cold-start downloads
 RUN python -c "\
 from transformers import pipeline; \
 pipeline('text-classification', \

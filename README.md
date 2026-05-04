@@ -23,56 +23,61 @@ pinned: false
 
 This project is for CTTC Data Science Technical Report. It trains a Linear Support Vector Classifier (LinearSVC) to predict the donor language of Japanese loanwords (gairaigo, 外来語) written in katakana, using character-level n-gram TF-IDF features extracted from the [JMdict](https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project) multilingual electronic dictionary. The classifier distinguishes loanwords originating from English, French, and German — the three European donor languages with the most historically significant and phonologically distinct presence in the Japanese lexicon. The pipeline covers the full ML workflow: loading, preprocessing, feature extraction, training, evaluation, visualization, and interactive prediction.
 
+The API has since been extended with an emotion detection endpoint (`POST /emotion`) as part of a follow-up activity: _Extend a prototype with emotion detection feature_. See [Extension: Emotion Endpoint](#extension-emotion-endpoint).
+
 ## Dataset
 
-| Field | Details |
-|---|---|
-| Source | [JMdict/EDICT — Electronic Dictionary Research and Development Group](https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project) |
-| Format | XML with `<lsource>` tags carrying ISO 639-2 donor language codes |
-| Raw entries | 6,108 gairaigo entries across 79 donor languages |
-| Filtered entries | 4,009 entries after class filtering (English, French, German only) |
-| Train / Test split | 80% / 20% stratified |
+| Field              | Details                                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Source             | [JMdict/EDICT — Electronic Dictionary Research and Development Group](https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project) |
+| Format             | XML with `<lsource>` tags carrying ISO 639-2 donor language codes                                                                           |
+| Raw entries        | 6,108 gairaigo entries across 79 donor languages                                                                                            |
+| Filtered entries   | 4,009 entries after class filtering (English, French, German only)                                                                          |
+| Train / Test split | 80% / 20% stratified                                                                                                                        |
 
 ## Dependencies
 
-| Package | Purpose |
-|---|---|
-| `lxml` | XML parsing of the JMdict file |
-| `pandas` | Data loading, cleaning, and tabular operations |
+| Package        | Purpose                                                          |
+| -------------- | ---------------------------------------------------------------- |
+| `lxml`         | XML parsing of the JMdict file                                   |
+| `pandas`       | Data loading, cleaning, and tabular operations                   |
 | `scikit-learn` | TF-IDF vectorization, LinearSVC training, and evaluation metrics |
-| `matplotlib` | Chart rendering and figure export |
-| `seaborn` | Statistical chart styling |
-| `joblib` | Model artifact serialization |
+| `matplotlib`   | Chart rendering and figure export                                |
+| `seaborn`      | Statistical chart styling                                        |
+| `joblib`       | Model artifact serialization                                     |
 
 ## Project Structure
 
 ```
 gairaigo_origin/
+├── api/
+│ ├── main.py # FastAPI app — /predict, /emotion, /health, /languages
+│ └── requirements.txt # API-specific dependencies (includes transformers)
 ├── data/
-│   └── JMdict                          # JMdict XML dictionary file (place here before running)
+│ └── JMdict # JMdict XML dictionary file (place here before running)
 ├── models/
-│   ├── model.joblib                    # Saved LinearSVC classifier
-│   ├── vectorizer.joblib               # Saved TF-IDF vectorizer
-│   └── encoder.joblib                  # Saved LabelEncoder
+│ ├── model.joblib # Saved LinearSVC classifier
+│ ├── vectorizer.joblib # Saved TF-IDF vectorizer
+│ └── encoder.joblib # Saved LabelEncoder
 ├── output/
-│   ├── plots/
-│   │   ├── class_distribution.png      # Bar chart of class sample counts
-│   │   ├── confusion_matrix.png        # Heatmap of test set predictions
-│   │   └── top_features.png            # Top discriminative n-gram features per class
-│   └── results/
-│       └── classified_loanwords.csv    # Per-word predictions on the test set
+│ ├── plots/
+│ │ ├── class_distribution.png # Bar chart of class sample counts
+│ │ ├── confusion_matrix.png # Heatmap of test set predictions
+│ │ └── top_features.png # Top discriminative n-gram features per class
+│ └── results/
+│ └── classified_loanwords.csv # Per-word predictions on the test set
 ├── scripts/
-│   ├── train.py                        # Standalone training script — saves model artifacts
-│   └── predict.py                      # Interactive prediction using saved artifacts
+│ ├── train.py # Standalone training script — saves model artifacts
+│ └── predict.py # Interactive prediction using saved artifacts
 ├── src/
-│   ├── __init__.py
-│   ├── constants.py                    # ISO 639-2 code to language name mapping
-│   ├── loader.py                       # JMdict XML parser and gairaigo extractor
-│   ├── preprocessor.py                 # Deduplication, class filtering, and TF-IDF featurization
-│   ├── trainer.py                      # Train/test split and LinearSVC training
-│   ├── evaluator.py                    # Accuracy, F1, and confusion matrix computation
-│   └── visualizer.py                   # All chart generation (matplotlib + seaborn)
-├── main.py                             # Entry point — runs the full pipeline end-to-end
+│ ├── init.py
+│ ├── constants.py # ISO 639-2 code to language name mapping
+│ ├── loader.py # JMdict XML parser and gairaigo extractor
+│ ├── preprocessor.py # Deduplication, class filtering, and TF-IDF featurization
+│ ├── trainer.py # Train/test split and LinearSVC training
+│ ├── evaluator.py # Accuracy, F1, and confusion matrix computation
+│ └── visualizer.py # All chart generation (matplotlib + seaborn)
+├── main.py # Entry point — runs the full pipeline end-to-end
 └── requirements.txt
 ```
 
@@ -100,23 +105,67 @@ The pipeline runs in eight sequential steps, all orchestrated from `main.py`.
 
 The classifier achieved an overall accuracy of **85.29%** and a weighted F1-score of **0.85** on the held-out test set.
 
-| Language | Precision | Recall | F1-Score | Support |
-|----------|-----------|--------|----------|---------|
-| English  | 0.90      | 0.93   | 0.91     | 494     |
-| French   | 0.80      | 0.82   | 0.81     | 202     |
-| German   | 0.68      | 0.58   | 0.63     | 106     |
-| **Weighted Avg.** | **0.85** | **0.85** | **0.85** | **802** |
+| Language          | Precision | Recall   | F1-Score | Support |
+| ----------------- | --------- | -------- | -------- | ------- |
+| English           | 0.90      | 0.93     | 0.91     | 494     |
+| French            | 0.80      | 0.82     | 0.81     | 202     |
+| German            | 0.68      | 0.58     | 0.63     | 106     |
+| **Weighted Avg.** | **0.85**  | **0.85** | **0.85** | **802** |
 
 ## Visualizations
 
 ### Confusion Matrix
+
 ![Confusion Matrix](output/plots/confusion_matrix.png)
 
 ### Class Distribution
+
 ![Class Distribution](output/plots/class_distribution.png)
 
 ### Top Discriminative Features
+
 ![Top Features](output/plots/top_features.png)
+
+## Extension: Emotion Endpoint
+
+> This section documents the `POST /emotion` endpoint, which was added as an extension to the original API.
+
+### Overview
+
+The original API exposed two endpoints: `GET /languages` and `POST /predict` (the LinearSVC donor-language classifier). The extension adds a third endpoint, `POST /emotion`, which accepts plain English text, detects the writer's emotion, and returns a curated Japanese music playlist and a set of thematically related gairaigo loanwords. This powers the Feel (感情) panel in the Kotabi frontend.
+
+### Model
+
+Emotion classification uses [`j-hartmann/emotion-english-distilroberta-base`](https://huggingface.co/j-hartmann/emotion-english-distilroberta-base), a DistilRoBERTa model fine-tuned on multiple emotion datasets. It is loaded at startup via the Hugging Face `transformers` pipeline and classifies text into one of seven labels: `joy`, `sadness`, `anger`, `fear`, `surprise`, `disgust`, or `neutral`.
+
+### Endpoint
+
+**`POST /emotion`**
+
+Request body:
+
+```json
+{ "text": "I feel nostalgic and a little tired" }
+```
+
+Response:
+
+```json
+{
+  "text": "I feel nostalgic and a little tired",
+  "emotion": "sadness",
+  "music_list": [
+      { "title": "ZONE - Kimi ga Kureta Mono", "video_id": "Of36Qh7WLSQ" },
+      ...
+  ],
+  "loanwords": [
+      { "katakana": "ノスタルジー", "meaning": "nostalgia", "language": "French", "iso2": "FR" },
+      ...
+    ]
+}
+```
+
+The `music_list` is a full playlist for the detected emotion (not just one song), so the frontend can let users cycle through tracks. The `loanwords` list contains gairaigo entries hand-curated per emotion; their `iso2` codes are used by the frontend to highlight donor countries on the map.
 
 ## Setup and Usage
 
@@ -131,6 +180,12 @@ The classifier achieved an overall accuracy of **85.29%** and a weighted F1-scor
 git clone https://github.com/krislette/gairaigo-origin.git
 cd gairaigo-origin
 pip install lxml pandas scikit-learn matplotlib seaborn joblib
+```
+
+To also run the API (required for the Kotabi frontend, including the Feel panel):
+
+```bash
+pip install -r api/requirements.txt
 ```
 
 ### Download the Dataset
@@ -182,6 +237,15 @@ You can also pass words directly as arguments:
 ```bash
 python -m scripts.predict アルバイト コーヒー テレビ
 ```
+
+### Run the API
+
+```bash
+cd api
+uvicorn main:app --reload --port 8000
+```
+
+The API will be available at `http://localhost:8000`. The `/emotion` endpoint requires the emotion model to download on first startup (~330 MB).
 
 ## License
 

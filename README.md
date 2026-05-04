@@ -51,33 +51,33 @@ The API has since been extended with an emotion detection endpoint (`POST /emoti
 ```
 gairaigo_origin/
 ├── api/
-│ ├── main.py # FastAPI app — /predict, /emotion, /health, /languages
-│ └── requirements.txt # API-specific dependencies (includes transformers)
+│ ├── main.py                   # FastAPI app — /predict, /emotion, /health, /languages
+│ └── requirements.txt          # API-specific dependencies (includes transformers)
 ├── data/
-│ └── JMdict # JMdict XML dictionary file (place here before running)
+│ └── JMdict                    # JMdict XML dictionary file (place here before running)
 ├── models/
-│ ├── model.joblib # Saved LinearSVC classifier
-│ ├── vectorizer.joblib # Saved TF-IDF vectorizer
-│ └── encoder.joblib # Saved LabelEncoder
+│ ├── model.joblib              # Saved LinearSVC classifier
+│ ├── vectorizer.joblib         # Saved TF-IDF vectorizer
+│ └── encoder.joblib            # Saved LabelEncoder
 ├── output/
 │ ├── plots/
-│ │ ├── class_distribution.png # Bar chart of class sample counts
-│ │ ├── confusion_matrix.png # Heatmap of test set predictions
-│ │ └── top_features.png # Top discriminative n-gram features per class
+│ │ ├── class_distribution.png  # Bar chart of class sample counts
+│ │ ├── confusion_matrix.png    # Heatmap of test set predictions
+│ │ └── top_features.png        # Top discriminative n-gram features per class
 │ └── results/
-│ └── classified_loanwords.csv # Per-word predictions on the test set
+│ └── classified_loanwords.csv  # Per-word predictions on the test set
 ├── scripts/
-│ ├── train.py # Standalone training script — saves model artifacts
-│ └── predict.py # Interactive prediction using saved artifacts
+│ ├── train.py                  # Standalone training script — saves model artifacts
+│ └── predict.py                # Interactive prediction using saved artifacts
 ├── src/
 │ ├── init.py
-│ ├── constants.py # ISO 639-2 code to language name mapping
-│ ├── loader.py # JMdict XML parser and gairaigo extractor
-│ ├── preprocessor.py # Deduplication, class filtering, and TF-IDF featurization
-│ ├── trainer.py # Train/test split and LinearSVC training
-│ ├── evaluator.py # Accuracy, F1, and confusion matrix computation
-│ └── visualizer.py # All chart generation (matplotlib + seaborn)
-├── main.py # Entry point — runs the full pipeline end-to-end
+│ ├── constants.py              # ISO 639-2 code to language name mapping
+│ ├── loader.py                 # JMdict XML parser and gairaigo extractor
+│ ├── preprocessor.py           # Deduplication, class filtering, and TF-IDF featurization
+│ ├── trainer.py                # Train/test split and LinearSVC training
+│ ├── evaluator.py              # Accuracy, F1, and confusion matrix computation
+│ └── visualizer.py             # All chart generation (matplotlib + seaborn)
+├── main.py                     # Entry point — runs the full pipeline end-to-end
 └── requirements.txt
 ```
 

@@ -30,4 +30,4 @@ COPY --chown=user api/ ./api/
 EXPOSE 7860
 
 # Start the server on port 7860
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "7860", "--root-path", "/api"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "7860"]
